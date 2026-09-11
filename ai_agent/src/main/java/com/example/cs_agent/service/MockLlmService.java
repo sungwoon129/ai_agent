@@ -1,8 +1,14 @@
 package com.example.cs_agent.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 @Service
+@ConditionalOnProperty(
+        prefix = "app.llm",
+        name = "provider",
+        havingValue = "mock",
+        matchIfMissing = true)
 public class MockLlmService implements LlmService {
 
     @Override
