@@ -74,6 +74,31 @@ cd ai_agent
 
 애플리케이션은 기본적으로 `http://localhost:8080`에서 실행됩니다.
 
+### LLM 구현체 전환
+
+기본값은 API 키 없이 실행할 수 있는 키워드 기반 mock 구현입니다.
+
+```yaml
+app:
+  llm:
+    provider: mock
+```
+
+실제 OpenAI 기반 구현체를 사용하려면 환경 변수에 API 키를 설정하고 아래처럼 바꿉니다. 두 구현체는 같은 `LlmService` 인터페이스를 사용하므로 서비스·컨트롤러 코드를 수정할 필요가 없습니다.
+
+```yaml
+spring:
+  ai:
+    model:
+      chat: openai
+    openai:
+      api-key: ${OPENAI_API_KEY}
+
+app:
+  llm:
+    provider: openai
+```
+
 ### 테스트
 
 ```bash
